@@ -94,7 +94,6 @@ body {
 
 .heart-main {
     font-size: 75px;
-
     animation: heartbeat 1.4s infinite;
 }
 
@@ -200,7 +199,6 @@ button:active {
     background: rgba(20,0,10,0.45);
 
     opacity: 0;
-
     visibility: hidden;
 
     transition: opacity 1s ease;
@@ -210,7 +208,6 @@ button:active {
 
 .video-container.show {
     opacity: 1;
-
     visibility: visible;
 }
 
@@ -226,13 +223,13 @@ button:active {
 /* ===== ФІНАЛ ===== */
 
 .final-card {
-    max-width: 650px;
+    max-width: 700px;
 }
 
 .final-card h1 {
-    font-size: clamp(32px, 8vw, 55px);
+    font-size: clamp(25px, 6vw, 42px);
 
-    line-height: 1.2;
+    line-height: 1.35;
 
     margin: 10px 0 25px;
 
@@ -240,11 +237,11 @@ button:active {
 }
 
 .final-card p {
-    font-size: clamp(20px, 5vw, 28px);
+    font-size: clamp(19px, 4.5vw, 27px);
 
     font-weight: bold;
 
-    line-height: 1.5;
+    line-height: 1.55;
 }
 
 /* ===== СЕРДЕЧКА ===== */
@@ -345,7 +342,6 @@ button:active {
 
     .card {
         padding: 28px 20px;
-
         border-radius: 25px;
     }
 
@@ -363,8 +359,15 @@ button:active {
 
     button {
         font-size: 17px;
-
         padding: 14px 25px;
+    }
+
+    .final-card h1 {
+        font-size: 25px;
+    }
+
+    .final-card p {
+        font-size: 18px;
     }
 }
 </style>
@@ -390,7 +393,7 @@ button:active {
             У мене є для тебе дещо особливе...
         </p>
 
-        <button onclick="goToScreen(2)">
+        <button id="openButton">
             Відкрити ❤️
         </button>
 
@@ -421,7 +424,7 @@ button:active {
             Ти у мене найкраща та найкоханіша дівчинка ❤️💕💗
         </p>
 
-        <button onclick="goToScreen(3)">
+        <button id="secondButton">
             Ще одне ❤️
         </button>
 
@@ -447,8 +450,7 @@ button:active {
 
         <button
             id="musicButton"
-            class="music-button"
-            onclick="startLove()">
+            class="music-button">
 
             🎵 Увімкнути нашу пісню
 
@@ -487,15 +489,14 @@ button:active {
         </div>
 
         <h1>
-            Я ТЕБЕ БЕЗМЕЖНО КОХАЮ
+            Я ДУЖЕ ВДЯЧНИЙ, ЩО ТИ З'ЯВИЛАСЯ У МОЄМУ ЖИТТІ.
+            ХОЧУ ПРОЖИТИ РАЗОМ З ТОБОЮ ДО СТАРОСТІ.
+            ТИ ЄДИНА, ХТО У МЕНЕ Є, ТА ЄДИНА, ХТО МЕНІ ПОТРІБЕН.
+            Я ТЕБЕ БЕЗМЕЖНО КОХАЮ ❤️
         </h1>
 
         <p>
             МОЯ КОХАНА ДРУЖИНА ❤️
-        </p>
-
-        <p>
-            ДЯКУЮ ТОБІ ЗА ТЕ, ЩО ТИ У МЕНЕ Є
         </p>
 
         <div style="font-size:38px; margin-top:25px;">
@@ -520,6 +521,18 @@ button:active {
 
 <script>
 
+const openButton =
+    document.getElementById("openButton");
+
+const secondButton =
+    document.getElementById("secondButton");
+
+const musicButton =
+    document.getElementById("musicButton");
+
+
+/* ===== ПЕРЕХІД МІЖ ЕКРАНАМИ ===== */
+
 function goToScreen(number) {
 
     document
@@ -539,20 +552,43 @@ function goToScreen(number) {
 
     }
 
+    /* Коли відкривається третій екран,
+       через 5 секунд показуємо кнопку */
+
     if (number === 3) {
 
-        setTimeout(() => {
+        musicButton.classList.remove("show");
 
-            const musicButton =
-                document.getElementById("musicButton");
+        setTimeout(() => {
 
             musicButton.classList.add("show");
 
         }, 5000);
 
     }
+
 }
 
+
+/* ===== ПЕРША КНОПКА ===== */
+
+openButton.addEventListener("click", () => {
+
+    goToScreen(2);
+
+});
+
+
+/* ===== ДРУГА КНОПКА ===== */
+
+secondButton.addEventListener("click", () => {
+
+    goToScreen(3);
+
+});
+
+
+/* ===== ПОЧАТОК ОСНОВНОЇ СЦЕНИ ===== */
 
 function startLove() {
 
@@ -566,12 +602,12 @@ function startLove() {
         document.getElementById("videoContainer");
 
 
-    /* Початок фрагмента пісні — 00:43 */
+    /* Пісня починається з 03:00 */
 
-    music.currentTime = 43;
+    music.currentTime = 180;
 
 
-    /* Відео починаємо з самого початку */
+    /* Відео починається з самого початку */
 
     video.currentTime = 0;
 
@@ -586,7 +622,7 @@ function startLove() {
     music.play().catch(error => {
 
         console.log(
-            "Не вдалося запустити музику:",
+            "Помилка запуску музики:",
             error
         );
 
@@ -598,33 +634,60 @@ function startLove() {
     video.play().catch(error => {
 
         console.log(
-            "Не вдалося запустити відео:",
+            "Помилка запуску відео:",
             error
         );
 
     });
 
 
-    /* Через 28 секунд закінчуємо */
+    /*
+       Через 28 секунд:
+
+       - відео зупиняється
+       - відео зникає
+       - відкривається фінальний екран
+
+       Музика НЕ зупиняється.
+    */
 
     setTimeout(() => {
-
-        music.pause();
 
         video.pause();
 
         videoContainer.classList.remove("show");
 
-
-        setTimeout(() => {
-
-            goToScreen(4);
-
-        }, 1000);
+        goToScreen(4);
 
     }, 28000);
 
+
+    /*
+       Через 57 секунд від початку:
+
+       03:00 + 00:57 = 03:57
+
+       зупиняємо музику.
+    */
+
+    setTimeout(() => {
+
+        music.pause();
+
+    }, 57000);
+
 }
+
+
+/* ===== КНОПКА МУЗИКИ ===== */
+
+musicButton.addEventListener("click", () => {
+
+    startLove();
+
+    musicButton.disabled = true;
+
+});
 
 
 /* ===== ПЛАВАЮЧІ СЕРДЕЧКА ===== */
