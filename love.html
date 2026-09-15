@@ -88,6 +88,7 @@
             opacity: 0;
             transform: scale(0.8);
         }
+
         to {
             opacity: 1;
             transform: scale(1);
@@ -142,6 +143,7 @@
     }
 
     @keyframes floatHeart {
+
         from {
             transform: translateY(0) scale(1);
             opacity: 1;
@@ -154,6 +156,7 @@
     }
 
     @media (max-width: 600px) {
+
         h1 {
             font-size: 30px;
         }
@@ -186,9 +189,14 @@
 
 <body>
 
+
 <!-- ЕКРАН 1 -->
+
 <div class="screen active" id="screen1">
-    <h1>💗 Для моєї маленької принцеси</h1>
+
+    <h1>
+        💗 Для моєї маленької принцеси
+    </h1>
 
     <p>
         У мене є для тебе дещо особливе...
@@ -197,12 +205,18 @@
     <button id="openButton">
         Відкрити ❤️
     </button>
+
 </div>
 
 
+
 <!-- ЕКРАН 2 -->
+
 <div class="screen" id="screen2">
-    <h1>💕 Моя кохана дружино</h1>
+
+    <h1>
+        💕 Моя кохана дружино
+    </h1>
 
     <p>
         Я дуже вдячний тобі, що ти з'явилася у моєму житті.
@@ -215,13 +229,20 @@
     <button id="secondButton">
         Ще одне ❤️
     </button>
+
 </div>
 
 
+
 <!-- ЕКРАН 3 -->
+
 <div class="screen" id="screen3">
 
-    <img src="photo.jpg" class="photo" alt="Наша фотографія">
+    <img
+        src="photo.jpg"
+        class="photo"
+        alt="Наша фотографія"
+    >
 
     <button id="musicButton">
         🎵 Увімкнути нашу пісню
@@ -230,7 +251,9 @@
 </div>
 
 
+
 <!-- ВІДЕО -->
+
 <div class="video-container" id="videoContainer">
 
     <video
@@ -244,19 +267,29 @@
 </div>
 
 
+
 <!-- ФІНАЛ -->
+
 <div class="screen" id="screen4">
 
     <div class="final-text">
 
         <h1>
-            Я ДУЖЕ ВДЯЧНИЙ, ЩО ТИ З'ЯВИЛАСЯ У МОЄМУ ЖИТТІ.<br><br>
 
-            ХОЧУ ПРОЖИТИ РАЗОМ З ТОБОЮ ДО СТАРОСТІ.<br><br>
+            Я ДУЖЕ ВДЯЧНИЙ, ЩО ТИ З'ЯВИЛАСЯ У МОЄМУ ЖИТТІ.
 
-            ТИ ЄДИНА, ХТО У МЕНЕ Є, ТА ЄДИНА, ХТО МЕНІ ПОТРІБЕН.<br><br>
+            <br><br>
+
+            ХОЧУ ПРОЖИТИ РАЗОМ З ТОБОЮ ДО СТАРОСТІ.
+
+            <br><br>
+
+            ТИ ЄДИНА, ХТО У МЕНЕ Є, ТА ЄДИНА, ХТО МЕНІ ПОТРІБЕН.
+
+            <br><br>
 
             Я ТЕБЕ БЕЗМЕЖНО КОХАЮ ❤️
+
         </h1>
 
         <div class="wife">
@@ -268,24 +301,41 @@
 </div>
 
 
+
 <!-- МУЗИКА -->
-<audio id="music" src="music.mp3" preload="auto"></audio>
+
+<audio
+    id="music"
+    src="music.mp3"
+    preload="auto">
+</audio>
+
 
 
 <script>
+
+
+/* Екрани */
 
 const screen1 = document.getElementById("screen1");
 const screen2 = document.getElementById("screen2");
 const screen3 = document.getElementById("screen3");
 const screen4 = document.getElementById("screen4");
 
+
+/* Кнопки */
+
 const openButton = document.getElementById("openButton");
 const secondButton = document.getElementById("secondButton");
 const musicButton = document.getElementById("musicButton");
 
+
+/* Музика та відео */
+
 const music = document.getElementById("music");
 const video = document.getElementById("loveVideo");
 const videoContainer = document.getElementById("videoContainer");
+
 
 
 /* Перемикання екранів */
@@ -297,26 +347,43 @@ function goToScreen(number) {
     screen3.classList.remove("active");
     screen4.classList.remove("active");
 
+
     if (number === 1) {
         screen1.classList.add("active");
     }
+
 
     if (number === 2) {
         screen2.classList.add("active");
     }
 
+
     if (number === 3) {
+
         screen3.classList.add("active");
 
+
+        /* Кнопка з'являється через 5 секунд */
+
+        musicButton.style.display = "none";
+
         setTimeout(() => {
+
             musicButton.style.display = "block";
+
         }, 5000);
+
     }
 
+
     if (number === 4) {
+
         screen4.classList.add("active");
+
     }
+
 }
+
 
 
 /* Перша кнопка */
@@ -328,6 +395,7 @@ openButton.addEventListener("click", () => {
 });
 
 
+
 /* Друга кнопка */
 
 secondButton.addEventListener("click", () => {
@@ -337,28 +405,51 @@ secondButton.addEventListener("click", () => {
 });
 
 
+
 /* Запуск музики та відео */
 
 function startLove() {
 
+
     /*
-       03:02 = 182 секунди
+        Пісня починається з 03:01
+
+        3 хвилини = 180 секунд
+        + 1 секунда
+        = 181 секунда
     */
 
-    music.currentTime = 182;
+    music.currentTime = 181;
+
+
+    /* Відео починається з самого початку */
 
     video.currentTime = 0;
 
+
+    /* Показуємо відео */
+
     videoContainer.classList.add("show");
 
+
+    /* Одночасно запускаємо музику */
+
     music.play();
+
+
+    /* Одночасно запускаємо відео */
 
     video.play();
 
 
+
     /*
-       Відео триває 23 секунди.
-       Після нього показуємо фінальний текст.
+        Відео триває 23 секунди.
+
+        Після 23 секунд:
+        - відео зупиняється
+        - відео зникає
+        - з'являється фінальний текст
     */
 
     setTimeout(() => {
@@ -372,9 +463,14 @@ function startLove() {
     }, 23000);
 
 
+
     /*
-       03:02 + 55 секунд = 03:57
-       Тут зупиняємо музику.
+        Пісня почалася з 03:01.
+
+        Через 55 секунд буде:
+        03:01 + 00:55 = 03:56
+
+        Тут музика зупиняється.
     */
 
     setTimeout(() => {
@@ -384,6 +480,7 @@ function startLove() {
     }, 55000);
 
 }
+
 
 
 /* Кнопка запуску */
@@ -397,27 +494,45 @@ musicButton.addEventListener("click", () => {
 });
 
 
+
 /* Плаваючі сердечка */
 
 setInterval(() => {
+
 
     const heart = document.createElement("div");
 
     heart.className = "heart";
 
-    const hearts = ["❤️", "💕", "💗", "💖", "💓"];
+
+    const hearts = [
+        "❤️",
+        "💕",
+        "💗",
+        "💖",
+        "💓"
+    ];
+
 
     heart.innerHTML =
-        hearts[Math.floor(Math.random() * hearts.length)];
+        hearts[
+            Math.floor(
+                Math.random() * hearts.length
+            )
+        ];
+
 
     heart.style.left =
         Math.random() * 100 + "vw";
 
+
     heart.style.animationDuration =
         (4 + Math.random() * 4) + "s";
 
+
     heart.style.fontSize =
         (18 + Math.random() * 25) + "px";
+
 
     document.body.appendChild(heart);
 
@@ -428,7 +543,9 @@ setInterval(() => {
 
     }, 8000);
 
+
 }, 350);
+
 
 </script>
 
