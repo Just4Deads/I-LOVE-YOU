@@ -534,9 +534,69 @@ function goToScreen(number) {
    ЗАПУСК МУЗИКИ + ВІДЕО
 ========================================== */
 
-function startLove() {
+<script>
+function goToScreen(number) {
+    document.querySelectorAll(".screen").forEach(screen => {
+        screen.classList.remove("active");
+    });
 
+    document.getElementById("screen" + number).classList.add("active");
+
+    if (number === 3) {
+        setTimeout(() => {
+            document.getElementById("musicButton").classList.add("show");
+        }, 5000);
+    }
+}
+
+function startLove() {
     const music = document.getElementById("loveMusic");
     const video = document.getElementById("loveVideo");
-    const
+    const videoContainer = document.getElementById("videoContainer");
+
+    music.currentTime = 43;
+    video.currentTime = 0;
+
+    videoContainer.classList.add("show");
+
+    music.play();
+    video.play();
+
+    setTimeout(() => {
+        music.pause();
+        video.pause();
+
+        videoContainer.classList.remove("show");
+
+        setTimeout(() => {
+            goToScreen(4);
+        }, 1000);
+
+    }, 28000);
+}
+
+/* Плаваючі сердечка */
+setInterval(() => {
+    const heart = document.createElement("div");
+
+    heart.className = "floating-heart";
+    heart.innerHTML = ["❤️", "💕", "💗", "💖", "💓", "💞"][
+        Math.floor(Math.random() * 6)
+    ];
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (20 + Math.random() * 25) + "px";
+    heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 10000);
+
+}, 350);
+</script>
+
+</body>
+</html>
 ```
