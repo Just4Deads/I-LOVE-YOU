@@ -1,443 +1,237 @@
-```html
 <!DOCTYPE html>
 <html lang="uk">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Для моєї принцеси ❤️</title>
+<title>Для моєї маленької принцеси ❤️</title>
 
 <style>
-* {
-    box-sizing: border-box;
-}
-
-html,
-body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    font-family: Arial, sans-serif;
-}
-
-body {
-    background:
-        radial-gradient(circle at 20% 10%, rgba(255,255,255,0.35), transparent 30%),
-        radial-gradient(circle at 80% 90%, rgba(255,180,210,0.4), transparent 35%),
-        linear-gradient(135deg, #ff6f91, #ff9eb5, #ff527c);
-    color: white;
-}
-
-.screen {
-    position: absolute;
-    inset: 0;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 25px;
-
-    opacity: 0;
-    visibility: hidden;
-
-    transform: scale(1.05);
-
-    transition:
-        opacity 1s ease,
-        transform 1s ease,
-        visibility 1s;
-}
-
-.screen.active {
-    opacity: 1;
-    visibility: visible;
-    transform: scale(1);
-}
-
-.card {
-    width: 100%;
-    max-width: 520px;
-
-    padding: 35px 25px;
-
-    text-align: center;
-
-    background: rgba(255,255,255,0.17);
-
-    border: 1px solid rgba(255,255,255,0.35);
-
-    border-radius: 30px;
-
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-
-    box-shadow:
-        0 20px 60px rgba(100,0,40,0.28);
-}
-
-.card h1 {
-    font-size: 34px;
-    margin: 10px 0 20px;
-}
-
-.card p {
-    font-size: 20px;
-    line-height: 1.6;
-    margin: 12px 0;
-}
-
-.heart-main {
-    font-size: 75px;
-    animation: heartbeat 1.4s infinite;
-}
-
-button {
-    margin-top: 25px;
-
-    padding: 15px 30px;
-
-    border: none;
-    border-radius: 50px;
-
-    background: white;
-    color: #ff4f7b;
-
-    font-size: 18px;
-    font-weight: bold;
-
-    cursor: pointer;
-
-    box-shadow: 0 10px 25px rgba(0,0,0,0.18);
-
-    transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
-}
-
-button:hover {
-    transform: scale(1.07);
-
-    box-shadow:
-        0 12px 30px rgba(0,0,0,0.25);
-}
-
-button:active {
-    transform: scale(0.96);
-}
-
-.photo-frame {
-    width: min(82vw, 360px);
-    height: min(82vw, 460px);
-
-    margin: 0 auto;
-
-    padding: 7px;
-
-    border-radius: 25px;
-
-    background: rgba(255,255,255,0.8);
-
-    box-shadow:
-        0 15px 50px rgba(80,0,30,0.35);
-
-    animation: photoAppear 1.5s ease;
-}
-
-.photo-frame img {
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-
-    border-radius: 20px;
-}
-
-.music-button {
-    opacity: 0;
-
-    transform: translateY(20px);
-
-    pointer-events: none;
-
-    transition:
-        opacity 1.2s ease,
-        transform 1.2s ease;
-}
-
-.music-button.show {
-    opacity: 1;
-
-    transform: translateY(0);
-
-    pointer-events: auto;
-}
-
-.video-container {
-    position: fixed;
-
-    inset: 0;
-
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    background: rgba(20,0,10,0.45);
-
-    opacity: 0;
-    visibility: hidden;
-
-    transition: opacity 1s ease;
-
-    z-index: 50;
-}
-
-.video-container.show {
-    opacity: 1;
-    visibility: visible;
-}
-
-#loveVideo {
-    width: 100%;
-    height: 100%;
-
-    object-fit: contain;
-
-    background: black;
-}
-
-.final-card {
-    max-width: 700px;
-}
-
-.final-card h1 {
-    font-size: clamp(25px, 6vw, 42px);
-
-    line-height: 1.35;
-
-    margin: 10px 0 25px;
-
-    animation: finalText 2s ease;
-}
-
-.final-card p {
-    font-size: clamp(19px, 4.5vw, 27px);
-
-    font-weight: bold;
-
-    line-height: 1.55;
-}
-
-.floating-heart {
-    position: fixed;
-
-    bottom: -60px;
-
-    pointer-events: none;
-
-    z-index: 100;
-
-    animation: floatHeart linear forwards;
-
-    opacity: 0;
-}
-
-@keyframes floatHeart {
-
-    0% {
-        transform:
-            translateY(0)
-            rotate(0deg)
-            scale(0.7);
-
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        color: white;
+    }
+
+    .screen {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 25px;
         opacity: 0;
+        pointer-events: none;
+        transition: opacity 1s ease;
     }
 
-    15% {
-        opacity: 0.8;
-    }
-
-    80% {
-        opacity: 0.75;
-    }
-
-    100% {
-        transform:
-            translateY(-115vh)
-            rotate(360deg)
-            scale(1.2);
-
-        opacity: 0;
-    }
-}
-
-@keyframes heartbeat {
-
-    0%, 100% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.18);
-    }
-}
-
-@keyframes photoAppear {
-
-    from {
-        opacity: 0;
-
-        transform:
-            scale(0.7)
-            rotate(-4deg);
-    }
-
-    to {
+    .screen.active {
         opacity: 1;
-
-        transform:
-            scale(1)
-            rotate(0);
-    }
-}
-
-@keyframes finalText {
-
-    from {
-        opacity: 0;
-
-        transform: scale(0.7);
+        pointer-events: auto;
     }
 
-    to {
-        opacity: 1;
-
-        transform: scale(1);
-    }
-}
-
-@media (max-width: 600px) {
-
-    .card {
-        padding: 28px 20px;
-        border-radius: 25px;
+    h1 {
+        font-size: 42px;
+        margin-bottom: 20px;
+        text-shadow: 0 3px 10px rgba(0,0,0,0.2);
     }
 
-    .card h1 {
-        font-size: 28px;
-    }
-
-    .card p {
-        font-size: 18px;
-    }
-
-    .heart-main {
-        font-size: 65px;
+    p {
+        font-size: 22px;
+        line-height: 1.5;
+        max-width: 800px;
+        text-shadow: 0 2px 7px rgba(0,0,0,0.15);
     }
 
     button {
-        font-size: 17px;
-        padding: 14px 25px;
+        margin-top: 30px;
+        padding: 16px 32px;
+        border: none;
+        border-radius: 40px;
+        background: white;
+        color: #ff5c8a;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .final-card h1 {
+    button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+    }
+
+    button:active {
+        transform: scale(0.97);
+    }
+
+    .photo {
+        width: min(80vw, 420px);
+        max-height: 55vh;
+        object-fit: contain;
+        border-radius: 25px;
+        box-shadow: 0 10px 35px rgba(0,0,0,0.3);
+        animation: photoAppear 1.5s ease;
+    }
+
+    @keyframes photoAppear {
+        from {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    .video-container {
+        position: fixed;
+        inset: 0;
+        background: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.8s ease;
+        z-index: 20;
+    }
+
+    .video-container.show {
+        opacity: 1;
+    }
+
+    video {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .final-text {
+        max-width: 900px;
+    }
+
+    .final-text h1 {
+        font-size: 34px;
+        line-height: 1.5;
+    }
+
+    .final-text .wife {
+        margin-top: 25px;
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    .heart {
+        position: fixed;
+        bottom: -30px;
         font-size: 25px;
+        animation: floatHeart linear forwards;
+        pointer-events: none;
+        z-index: 30;
     }
 
-    .final-card p {
-        font-size: 18px;
+    @keyframes floatHeart {
+        from {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+
+        to {
+            transform: translateY(-110vh) scale(1.5);
+            opacity: 0;
+        }
     }
-}
+
+    @media (max-width: 600px) {
+        h1 {
+            font-size: 30px;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        button {
+            font-size: 17px;
+            padding: 14px 25px;
+        }
+
+        .final-text h1 {
+            font-size: 23px;
+            line-height: 1.55;
+        }
+
+        .final-text .wife {
+            font-size: 24px;
+        }
+
+        .photo {
+            width: 85vw;
+            max-height: 50vh;
+        }
+    }
 </style>
 </head>
 
 <body>
 
-<section class="screen active" id="screen1">
+<!-- ЕКРАН 1 -->
+<div class="screen active" id="screen1">
+    <h1>💗 Для моєї маленької принцеси</h1>
 
-    <div class="card">
+    <p>
+        У мене є для тебе дещо особливе...
+    </p>
 
-        <div class="heart-main">
-            💗
-        </div>
-
-        <h1>
-            Для моєї маленької принцеси
-        </h1>
-
-        <p>
-            У мене є для тебе дещо особливе...
-        </p>
-
-        <button id="openButton">
-            Відкрити ❤️
-        </button>
-
-    </div>
-
-</section>
+    <button id="openButton">
+        Відкрити ❤️
+    </button>
+</div>
 
 
-<section class="screen" id="screen2">
+<!-- ЕКРАН 2 -->
+<div class="screen" id="screen2">
+    <h1>💕 Моя кохана дружино</h1>
 
-    <div class="card">
+    <p>
+        Я дуже вдячний тобі, що ти з'явилася у моєму житті.
+    </p>
 
-        <div class="heart-main">
-            💕
-        </div>
+    <p>
+        Ти у мене найкраща та найкоханіша дівчинка ❤️💕💗
+    </p>
 
-        <h1>
-            Моя кохана дружино
-        </h1>
-
-        <p>
-            Я дуже вдячний тобі, що ти з'явилася у моєму житті.
-        </p>
-
-        <p>
-            Ти у мене найкраща та найкоханіша дівчинка ❤️💕💗
-        </p>
-
-        <button id="secondButton">
-            Ще одне ❤️
-        </button>
-
-    </div>
-
-</section>
+    <button id="secondButton">
+        Ще одне ❤️
+    </button>
+</div>
 
 
-<section class="screen" id="screen3">
+<!-- ЕКРАН 3 -->
+<div class="screen" id="screen3">
 
-    <div class="card">
+    <img src="photo.jpg" class="photo" alt="Наша фотографія">
 
-        <div class="photo-frame">
+    <button id="musicButton">
+        🎵 Увімкнути нашу пісню
+    </button>
 
-            <img
-                src="photo.jpg"
-                alt="Наша фотографія"
-            >
-
-        </div>
-
-        <button
-            id="musicButton"
-            class="music-button">
-
-            🎵 Увімкнути нашу пісню
-
-        </button>
-
-    </div>
-
-</section>
+</div>
 
 
-<div
-    class="video-container"
-    id="videoContainer">
+<!-- ВІДЕО -->
+<div class="video-container" id="videoContainer">
 
     <video
         id="loveVideo"
@@ -450,88 +244,82 @@ button:active {
 </div>
 
 
-<section class="screen" id="screen4">
+<!-- ФІНАЛ -->
+<div class="screen" id="screen4">
 
-    <div class="card final-card">
-
-        <div class="heart-main">
-            💖
-        </div>
+    <div class="final-text">
 
         <h1>
-            Я ДУЖЕ ВДЯЧНИЙ, ЩО ТИ З'ЯВИЛАСЯ У МОЄМУ ЖИТТІ.
-            ХОЧУ ПРОЖИТИ РАЗОМ З ТОБОЮ ДО СТАРОСТІ.
-            ТИ ЄДИНА, ХТО У МЕНЕ Є, ТА ЄДИНА, ХТО МЕНІ ПОТРІБЕН.
+            Я ДУЖЕ ВДЯЧНИЙ, ЩО ТИ З'ЯВИЛАСЯ У МОЄМУ ЖИТТІ.<br><br>
+
+            ХОЧУ ПРОЖИТИ РАЗОМ З ТОБОЮ ДО СТАРОСТІ.<br><br>
+
+            ТИ ЄДИНА, ХТО У МЕНЕ Є, ТА ЄДИНА, ХТО МЕНІ ПОТРІБЕН.<br><br>
+
             Я ТЕБЕ БЕЗМЕЖНО КОХАЮ ❤️
         </h1>
 
-        <p>
+        <div class="wife">
             МОЯ КОХАНА ДРУЖИНА ❤️
-        </p>
-
-        <div style="font-size:38px; margin-top:25px;">
-            ❤️ 💕 💗 💖 💓 💞
         </div>
 
     </div>
 
-</section>
+</div>
 
 
-<audio
-    id="loveMusic"
-    src="music.mp3"
-    preload="auto">
-</audio>
+<!-- МУЗИКА -->
+<audio id="music" src="music.mp3" preload="auto"></audio>
 
 
 <script>
 
-const openButton =
-    document.getElementById("openButton");
+const screen1 = document.getElementById("screen1");
+const screen2 = document.getElementById("screen2");
+const screen3 = document.getElementById("screen3");
+const screen4 = document.getElementById("screen4");
 
-const secondButton =
-    document.getElementById("secondButton");
+const openButton = document.getElementById("openButton");
+const secondButton = document.getElementById("secondButton");
+const musicButton = document.getElementById("musicButton");
 
-const musicButton =
-    document.getElementById("musicButton");
+const music = document.getElementById("music");
+const video = document.getElementById("loveVideo");
+const videoContainer = document.getElementById("videoContainer");
 
+
+/* Перемикання екранів */
 
 function goToScreen(number) {
 
-    document
-        .querySelectorAll(".screen")
-        .forEach(screen => {
+    screen1.classList.remove("active");
+    screen2.classList.remove("active");
+    screen3.classList.remove("active");
+    screen4.classList.remove("active");
 
-            screen.classList.remove("active");
+    if (number === 1) {
+        screen1.classList.add("active");
+    }
 
-        });
-
-    const target =
-        document.getElementById("screen" + number);
-
-    if (target) {
-
-        target.classList.add("active");
-
+    if (number === 2) {
+        screen2.classList.add("active");
     }
 
     if (number === 3) {
-
-        musicButton.classList.remove("show");
+        screen3.classList.add("active");
 
         setTimeout(() => {
-
-            musicButton.classList.add("show");
-
+            musicButton.style.display = "block";
         }, 5000);
-
     }
 
+    if (number === 4) {
+        screen4.classList.add("active");
+    }
 }
 
 
-/* ===== ПЕРША КНОПКА ===== */
+/* Перша кнопка */
 
 openButton.addEventListener("click", () => {
 
@@ -540,7 +328,7 @@ openButton.addEventListener("click", () => {
 });
 
 
-/* ===== ДРУГА КНОПКА ===== */
+/* Друга кнопка */
 
 secondButton.addEventListener("click", () => {
 
@@ -549,72 +337,28 @@ secondButton.addEventListener("click", () => {
 });
 
 
-/* ===== МУЗИКА + ВІДЕО ===== */
+/* Запуск музики та відео */
 
 function startLove() {
 
-    const music =
-        document.getElementById("loveMusic");
-
-    const video =
-        document.getElementById("loveVideo");
-
-    const videoContainer =
-        document.getElementById("videoContainer");
-
-
     /*
-       ПІСНЯ ПОЧИНАЄТЬСЯ РІВНО З 03:02
+       03:02 = 182 секунди
     */
 
     music.currentTime = 182;
 
-
-    /*
-       ВІДЕО ПОЧИНАЄТЬСЯ З ПОЧАТКУ
-    */
-
     video.currentTime = 0;
-
-
-    /*
-       ПОКАЗУЄМО ВІДЕО
-    */
 
     videoContainer.classList.add("show");
 
+    music.play();
 
-    /*
-       ЗАПУСКАЄМО МУЗИКУ
-    */
-
-    music.play().catch(error => {
-
-        console.log(
-            "Помилка запуску музики:",
-            error
-        );
-
-    });
+    video.play();
 
 
     /*
-       ЗАПУСКАЄМО ВІДЕО
-    */
-
-    video.play().catch(error => {
-
-        console.log(
-            "Помилка запуску відео:",
-            error
-        );
-
-    });
-
-
-    /*
-       ЧЕРЕЗ 28 СЕКУНД ВІДЕО ЗАКІНЧУЄТЬСЯ
-       І З'ЯВЛЯЄТЬСЯ ФІНАЛЬНИЙ ТЕКСТ.
+       Відео триває 23 секунди.
+       Після нього показуємо фінальний текст.
     */
 
     setTimeout(() => {
@@ -625,16 +369,12 @@ function startLove() {
 
         goToScreen(4);
 
-    }, 28000);
+    }, 23000);
 
 
     /*
-       ПІСНЯ ПОЧАЛАСЯ З 03:02.
-
-       ДО 03:57 — РІВНО 55 СЕКУНД.
-
-       ТОМУ МУЗИКА ЗУПИНИТЬСЯ
-       ЧЕРЕЗ 55 СЕКУНД.
+       03:02 + 55 секунд = 03:57
+       Тут зупиняємо музику.
     */
 
     setTimeout(() => {
@@ -646,52 +386,38 @@ function startLove() {
 }
 
 
-/* ===== КНОПКА МУЗИКИ ===== */
+/* Кнопка запуску */
 
 musicButton.addEventListener("click", () => {
 
-    startLove();
-
     musicButton.disabled = true;
+
+    startLove();
 
 });
 
 
-/* ===== ПЛАВАЮЧІ СЕРДЕЧКА ===== */
+/* Плаваючі сердечка */
 
 setInterval(() => {
 
-    const heart =
-        document.createElement("div");
+    const heart = document.createElement("div");
 
-    const hearts = [
-        "❤️",
-        "💕",
-        "💗",
-        "💖",
-        "💓",
-        "💞"
-    ];
+    heart.className = "heart";
 
-    heart.className =
-        "floating-heart";
+    const hearts = ["❤️", "💕", "💗", "💖", "💓"];
 
     heart.innerHTML =
-        hearts[
-            Math.floor(
-                Math.random() * hearts.length
-            )
-        ];
+        hearts[Math.floor(Math.random() * hearts.length)];
 
     heart.style.left =
         Math.random() * 100 + "vw";
 
-    heart.style.fontSize =
-        (20 + Math.random() * 25) + "px";
-
     heart.style.animationDuration =
-        (5 + Math.random() * 5) + "s";
+        (4 + Math.random() * 4) + "s";
 
+    heart.style.fontSize =
+        (18 + Math.random() * 25) + "px";
 
     document.body.appendChild(heart);
 
@@ -700,7 +426,7 @@ setInterval(() => {
 
         heart.remove();
 
-    }, 10000);
+    }, 8000);
 
 }, 350);
 
@@ -708,4 +434,3 @@ setInterval(() => {
 
 </body>
 </html>
-```
