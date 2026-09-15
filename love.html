@@ -30,8 +30,6 @@ body {
     color: white;
 }
 
-/* ===== ЕКРАНИ ===== */
-
 .screen {
     position: absolute;
     inset: 0;
@@ -58,8 +56,6 @@ body {
     visibility: visible;
     transform: scale(1);
 }
-
-/* ===== КАРТКА ===== */
 
 .card {
     width: 100%;
@@ -98,8 +94,6 @@ body {
     animation: heartbeat 1.4s infinite;
 }
 
-/* ===== КНОПКИ ===== */
-
 button {
     margin-top: 25px;
 
@@ -134,8 +128,6 @@ button:active {
     transform: scale(0.96);
 }
 
-/* ===== ФОТО ===== */
-
 .photo-frame {
     width: min(82vw, 360px);
     height: min(82vw, 460px);
@@ -163,8 +155,6 @@ button:active {
     border-radius: 20px;
 }
 
-/* ===== МУЗИКА ===== */
-
 .music-button {
     opacity: 0;
 
@@ -184,8 +174,6 @@ button:active {
 
     pointer-events: auto;
 }
-
-/* ===== ВІДЕО ===== */
 
 .video-container {
     position: fixed;
@@ -221,8 +209,6 @@ button:active {
     background: black;
 }
 
-/* ===== ФІНАЛ ===== */
-
 .final-card {
     max-width: 700px;
 }
@@ -244,8 +230,6 @@ button:active {
 
     line-height: 1.55;
 }
-
-/* ===== СЕРДЕЧКА ===== */
 
 .floating-heart {
     position: fixed;
@@ -289,8 +273,6 @@ button:active {
         opacity: 0;
     }
 }
-
-/* ===== АНІМАЦІЇ ===== */
 
 @keyframes heartbeat {
 
@@ -337,8 +319,6 @@ button:active {
     }
 }
 
-/* ===== МОБІЛЬНИЙ ЕКРАН ===== */
-
 @media (max-width: 600px) {
 
     .card {
@@ -376,8 +356,6 @@ button:active {
 
 <body>
 
-<!-- ===== ЕКРАН 1 ===== -->
-
 <section class="screen active" id="screen1">
 
     <div class="card">
@@ -402,8 +380,6 @@ button:active {
 
 </section>
 
-
-<!-- ===== ЕКРАН 2 ===== -->
 
 <section class="screen" id="screen2">
 
@@ -434,8 +410,6 @@ button:active {
 </section>
 
 
-<!-- ===== ЕКРАН 3 ===== -->
-
 <section class="screen" id="screen3">
 
     <div class="card">
@@ -462,8 +436,6 @@ button:active {
 </section>
 
 
-<!-- ===== ВІДЕО ===== -->
-
 <div
     class="video-container"
     id="videoContainer">
@@ -478,8 +450,6 @@ button:active {
 
 </div>
 
-
-<!-- ===== ФІНАЛ ===== -->
 
 <section class="screen" id="screen4">
 
@@ -509,16 +479,12 @@ button:active {
 </section>
 
 
-<!-- ===== МУЗИКА ===== -->
-
 <audio
     id="loveMusic"
     src="music.mp3"
     preload="auto">
 </audio>
 
-
-<!-- ===== JAVASCRIPT ===== -->
 
 <script>
 
@@ -531,8 +497,6 @@ const secondButton =
 const musicButton =
     document.getElementById("musicButton");
 
-
-/* ===== ПЕРЕХІД МІЖ ЕКРАНАМИ ===== */
 
 function goToScreen(number) {
 
@@ -586,7 +550,7 @@ secondButton.addEventListener("click", () => {
 });
 
 
-/* ===== ПОЧАТОК ОСНОВНОЇ СЦЕНИ ===== */
+/* ===== МУЗИКА + ВІДЕО ===== */
 
 function startLove() {
 
@@ -601,10 +565,10 @@ function startLove() {
 
 
     /*
-       ПІСНЯ ПОЧИНАЄТЬСЯ З 03:00,3
+       ПІСНЯ ПОЧИНАЄТЬСЯ РІВНО З 03:01
     */
 
-    music.currentTime = 180.3;
+    music.currentTime = 181;
 
 
     /*
@@ -650,13 +614,8 @@ function startLove() {
 
 
     /*
-       ЧЕРЕЗ 28 СЕКУНД:
-
-       - відео зупиняється
-       - відео зникає
-       - з'являється фінальний текст
-
-       МУЗИКА ПРОДОВЖУЄ ГРАТИ.
+       ЧЕРЕЗ 28 СЕКУНД ВІДЕО ЗАКІНЧУЄТЬСЯ
+       І З'ЯВЛЯЄТЬСЯ ФІНАЛЬНИЙ ТЕКСТ.
     */
 
     setTimeout(() => {
@@ -671,19 +630,19 @@ function startLove() {
 
 
     /*
-       ПІСНЯ ПОЧАЛАСЯ З 03:00,3.
+       ПІСНЯ ПОЧАЛАСЯ З 03:01.
 
-       ЩОБ ЗУПИНИТИ ЇЇ РІВНО НА 03:57,0,
-       ВІД ПОЧАТКУ ВІДТВОРЕННЯ МАЄ ПРОЙТИ:
+       ДО 03:57 — РІВНО 56 СЕКУНД.
 
-       57 - 0.3 = 56.7 СЕКУНД.
+       ТОМУ МУЗИКА ЗУПИНИТЬСЯ
+       ЧЕРЕЗ 56 СЕКУНД.
     */
 
     setTimeout(() => {
 
         music.pause();
 
-    }, 56700);
+    }, 56000);
 
 }
 
@@ -713,4 +672,41 @@ setInterval(() => {
         "💖",
         "💓",
         "💞"
+    ];
+
+    heart.className =
+        "floating-heart";
+
+    heart.innerHTML =
+        hearts[
+            Math.floor(
+                Math.random() * hearts.length
+            )
+        ];
+
+    heart.style.left =
+        Math.random() * 100 + "vw";
+
+    heart.style.fontSize =
+        (20 + Math.random() * 25) + "px";
+
+    heart.style.animationDuration =
+        (5 + Math.random() * 5) + "s";
+
+
+    document.body.appendChild(heart);
+
+
+    setTimeout(() => {
+
+        heart.remove();
+
+    }, 10000);
+
+}, 350);
+
+</script>
+
+</body>
+</html>
 ```
