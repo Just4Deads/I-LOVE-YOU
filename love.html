@@ -1,0 +1,542 @@
+```html
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Для моєї принцеси ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background:
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,0.35), transparent 30%),
+        radial-gradient(circle at 80% 90%, rgba(255,180,210,0.4), transparent 35%),
+        linear-gradient(135deg, #ff6f91, #ff9eb5, #ff527c);
+
+    color: white;
+}
+
+/* ---------- ЕКРАНИ ---------- */
+
+.screen {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 25px;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.05);
+
+    transition:
+        opacity 1s ease,
+        transform 1s ease,
+        visibility 1s;
+}
+
+.screen.active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+/* ---------- КАРТКА ---------- */
+
+.card {
+    width: 100%;
+    max-width: 520px;
+
+    padding: 35px 25px;
+
+    text-align: center;
+
+    background: rgba(255,255,255,0.17);
+    border: 1px solid rgba(255,255,255,0.35);
+
+    border-radius: 30px;
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    box-shadow:
+        0 20px 60px rgba(100,0,40,0.28);
+
+    animation: cardAppear 1.2s ease;
+}
+
+.card h1 {
+    font-size: 34px;
+    margin: 10px 0 20px;
+}
+
+.card p {
+    font-size: 20px;
+    line-height: 1.6;
+    margin: 12px 0;
+}
+
+.heart-main {
+    font-size: 75px;
+    animation: heartbeat 1.4s infinite;
+}
+
+/* ---------- КНОПКИ ---------- */
+
+button {
+    margin-top: 25px;
+
+    padding: 15px 30px;
+
+    border: none;
+    border-radius: 50px;
+
+    background: white;
+    color: #ff4f7b;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+    transform: scale(1.07);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
+
+button:active {
+    transform: scale(0.96);
+}
+
+/* ---------- ФОТО ---------- */
+
+.photo-frame {
+    width: min(82vw, 360px);
+    height: min(82vw, 460px);
+
+    margin: 0 auto;
+
+    border-radius: 25px;
+
+    padding: 7px;
+
+    background: rgba(255,255,255,0.8);
+
+    box-shadow:
+        0 15px 50px rgba(80,0,30,0.35);
+
+    animation: photoAppear 1.5s ease;
+}
+
+.photo-frame img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 20px;
+}
+
+/* ---------- КНОПКА МУЗИКИ ---------- */
+
+.music-button {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+
+    transition:
+        opacity 1.2s ease,
+        transform 1.2s ease;
+}
+
+.music-button.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* ---------- ВІДЕО ---------- */
+
+.video-container {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(20,0,10,0.35);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: opacity 1.2s ease;
+}
+
+.video-container.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+#loveVideo {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    background: black;
+}
+
+/* ---------- ФІНАЛ ---------- */
+
+.final-card {
+    max-width: 650px;
+}
+
+.final-card h1 {
+    font-size: clamp(32px, 8vw, 55px);
+
+    line-height: 1.2;
+
+    margin: 10px 0 25px;
+
+    animation: finalText 2s ease;
+}
+
+.final-card p {
+    font-size: clamp(20px, 5vw, 28px);
+
+    font-weight: bold;
+
+    line-height: 1.5;
+}
+
+/* ---------- СЕРДЕЧКА ---------- */
+
+.floating-heart {
+    position: fixed;
+
+    bottom: -60px;
+
+    pointer-events: none;
+
+    z-index: 100;
+
+    animation: floatHeart linear forwards;
+
+    opacity: 0;
+}
+
+@keyframes floatHeart {
+
+    0% {
+        transform: translateY(0) rotate(0deg) scale(0.7);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 0.8;
+    }
+
+    80% {
+        opacity: 0.75;
+    }
+
+    100% {
+        transform:
+            translateY(-115vh)
+            rotate(360deg)
+            scale(1.2);
+
+        opacity: 0;
+    }
+}
+
+/* ---------- АНІМАЦІЇ ---------- */
+
+@keyframes heartbeat {
+
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.18);
+    }
+}
+
+@keyframes cardAppear {
+
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes photoAppear {
+
+    from {
+        opacity: 0;
+        transform: scale(0.7) rotate(-4deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
+}
+
+@keyframes finalText {
+
+    from {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ---------- МОБІЛЬНИЙ ЕКРАН ---------- */
+
+@media (max-width: 600px) {
+
+    .card {
+        padding: 28px 20px;
+        border-radius: 25px;
+    }
+
+    .card h1 {
+        font-size: 28px;
+    }
+
+    .card p {
+        font-size: 18px;
+    }
+
+    .heart-main {
+        font-size: 65px;
+    }
+
+    button {
+        font-size: 17px;
+        padding: 14px 25px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= ЕКРАН 1 ================= -->
+
+<section class="screen active" id="screen1">
+
+    <div class="card">
+
+        <div class="heart-main">💗</div>
+
+        <h1>Для моєї маленької принцеси</h1>
+
+        <p>
+            У мене є для тебе дещо особливе...
+        </p>
+
+        <button onclick="goToScreen(2)">
+            Відкрити ❤️
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ЕКРАН 2 ================= -->
+
+<section class="screen" id="screen2">
+
+    <div class="card">
+
+        <div class="heart-main">💕</div>
+
+        <h1>Моя кохана дружино</h1>
+
+        <p>
+            Я дуже вдячний тобі, що ти з'явилася у моєму житті.
+        </p>
+
+        <p>
+            Ти у мене найкраща та найкоханіша дівчинка ❤️💕💗
+        </p>
+
+        <button onclick="goToScreen(3)">
+            Ще одне ❤️
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ЕКРАН 3 ================= -->
+
+<section class="screen" id="screen3">
+
+    <div class="card">
+
+        <div class="photo-frame">
+
+            <!--
+            ТВОЄ ФОТО:
+            поклади фотографію поруч із love.html
+            та назви її photo.jpg
+            -->
+
+            <img src="photo.jpg" alt="Наша фотографія">
+
+        </div>
+
+        <button
+            id="musicButton"
+            class="music-button"
+            onclick="startLove()">
+
+            🎵 Увімкнути нашу пісню
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ВІДЕО ================= -->
+
+<div class="video-container" id="videoContainer">
+
+    <!--
+    ТВОЄ ВІДЕО:
+    поклади його поруч із love.html
+    та назви video.mp4
+
+    Відео повинно бути приблизно 28 секунд.
+    Звук вимкнений.
+    -->
+
+    <video
+        id="loveVideo"
+        src="video.mp4"
+        muted
+        playsinline
+        preload="auto">
+    </video>
+
+</div>
+
+
+<!-- ================= ФІНАЛ ================= -->
+
+<section class="screen" id="screen4">
+
+    <div class="card final-card">
+
+        <div class="heart-main">💖</div>
+
+        <h1>
+            Я ТЕБЕ БЕЗМЕЖНО КОХАЮ
+        </h1>
+
+        <p>
+            МОЯ КОХАНА ДРУЖИНА ❤️
+        </p>
+
+        <p>
+            ДЯКУЮ ТОБІ ЗА ТЕ, ЩО ТИ У МЕНЕ Є
+        </p>
+
+        <div style="font-size:38px; margin-top:25px;">
+            ❤️ 💕 💗 💖 💓 💞
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= МУЗИКА ================= -->
+
+<audio id="loveMusic" src="music.mp3" preload="auto"></audio>
+
+
+<script>
+
+/* ==========================================
+   ПЕРЕХІД МІЖ ЕКРАНАМИ
+========================================== */
+
+function goToScreen(number) {
+
+    document.querySelectorAll(".screen").forEach(screen => {
+        screen.classList.remove("active");
+    });
+
+    document
+        .getElementById("screen" + number)
+        .classList.add("active");
+
+
+    /* Якщо відкритий екран 3 —
+       запускаємо таймер на 5 секунд */
+
+    if (number === 3) {
+
+        setTimeout(() => {
+
+            document
+                .getElementById("musicButton")
+                .classList.add("show");
+
+        }, 5000);
+
+    }
+}
+
+
+/* ==========================================
+   ЗАПУСК МУЗИКИ + ВІДЕО
+========================================== */
+
+function startLove() {
+
+    const music = document.getElementById("loveMusic");
+    const video = document.getElementById("loveVideo");
+    const
+```
