@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="uk">
 <head>
@@ -552,9 +553,6 @@ function goToScreen(number) {
 
     }
 
-    /* Коли відкривається третій екран,
-       через 5 секунд показуємо кнопку */
-
     if (number === 3) {
 
         musicButton.classList.remove("show");
@@ -602,22 +600,30 @@ function startLove() {
         document.getElementById("videoContainer");
 
 
-    /* Пісня починається з 03:00 */
+    /*
+       ПІСНЯ ПОЧИНАЄТЬСЯ З 03:00,3
+    */
 
-    music.currentTime = 180;
+    music.currentTime = 180.3;
 
 
-    /* Відео починається з самого початку */
+    /*
+       ВІДЕО ПОЧИНАЄТЬСЯ З ПОЧАТКУ
+    */
 
     video.currentTime = 0;
 
 
-    /* Показуємо відео */
+    /*
+       ПОКАЗУЄМО ВІДЕО
+    */
 
     videoContainer.classList.add("show");
 
 
-    /* Запускаємо музику */
+    /*
+       ЗАПУСКАЄМО МУЗИКУ
+    */
 
     music.play().catch(error => {
 
@@ -629,7 +635,9 @@ function startLove() {
     });
 
 
-    /* Запускаємо відео */
+    /*
+       ЗАПУСКАЄМО ВІДЕО
+    */
 
     video.play().catch(error => {
 
@@ -642,13 +650,13 @@ function startLove() {
 
 
     /*
-       Через 28 секунд:
+       ЧЕРЕЗ 28 СЕКУНД:
 
        - відео зупиняється
        - відео зникає
-       - відкривається фінальний екран
+       - з'являється фінальний текст
 
-       Музика НЕ зупиняється.
+       МУЗИКА ПРОДОВЖУЄ ГРАТИ.
     */
 
     setTimeout(() => {
@@ -663,18 +671,19 @@ function startLove() {
 
 
     /*
-       Через 57 секунд від початку:
+       ПІСНЯ ПОЧАЛАСЯ З 03:00,3.
 
-       03:00 + 00:57 = 03:57
+       ЩОБ ЗУПИНИТИ ЇЇ РІВНО НА 03:57,0,
+       ВІД ПОЧАТКУ ВІДТВОРЕННЯ МАЄ ПРОЙТИ:
 
-       зупиняємо музику.
+       57 - 0.3 = 56.7 СЕКУНД.
     */
 
     setTimeout(() => {
 
         music.pause();
 
-    }, 57000);
+    }, 56700);
 
 }
 
@@ -704,40 +713,4 @@ setInterval(() => {
         "💖",
         "💓",
         "💞"
-    ];
-
-    heart.className =
-        "floating-heart";
-
-    heart.innerHTML =
-        hearts[
-            Math.floor(
-                Math.random() * hearts.length
-            )
-        ];
-
-    heart.style.left =
-        Math.random() * 100 + "vw";
-
-    heart.style.fontSize =
-        (20 + Math.random() * 25) + "px";
-
-    heart.style.animationDuration =
-        (5 + Math.random() * 5) + "s";
-
-
-    document.body.appendChild(heart);
-
-
-    setTimeout(() => {
-
-        heart.remove();
-
-    }, 10000);
-
-}, 350);
-
-</script>
-
-</body>
-</html>
+```
