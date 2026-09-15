@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ff9a9e">
 <title>Для моєї маленької принцеси ❤️</title>
 
 <style>
@@ -10,13 +11,20 @@
         box-sizing: border-box;
     }
 
+    html,
     body {
         margin: 0;
         padding: 0;
+        width: 100%;
+        height: 100%;
         overflow: hidden;
         font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+
+        background-color: #ff9a9e !important;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4) !important;
+
         color: white;
+        color-scheme: only light;
     }
 
     .screen {
@@ -28,6 +36,9 @@
         align-items: center;
         text-align: center;
         padding: 25px;
+
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4) !important;
+
         opacity: 0;
         pointer-events: none;
         transition: opacity 1s ease;
@@ -362,9 +373,6 @@ function goToScreen(number) {
 
         screen3.classList.add("active");
 
-
-        /* Кнопка з'являється через 5 секунд */
-
         musicButton.style.display = "none";
 
         setTimeout(() => {
@@ -422,7 +430,7 @@ function startLove() {
     music.currentTime = 181;
 
 
-    /* Відео починається з самого початку */
+    /* Відео з самого початку */
 
     video.currentTime = 0;
 
@@ -432,12 +440,12 @@ function startLove() {
     videoContainer.classList.add("show");
 
 
-    /* Одночасно запускаємо музику */
+    /* Запускаємо музику */
 
     music.play();
 
 
-    /* Одночасно запускаємо відео */
+    /* Запускаємо відео */
 
     video.play();
 
@@ -445,11 +453,6 @@ function startLove() {
 
     /*
         Відео триває 23 секунди.
-
-        Після 23 секунд:
-        - відео зупиняється
-        - відео зникає
-        - з'являється фінальний текст
     */
 
     setTimeout(() => {
@@ -465,12 +468,7 @@ function startLove() {
 
 
     /*
-        Пісня почалася з 03:01.
-
-        Через 55 секунд буде:
-        03:01 + 00:55 = 03:56
-
-        Тут музика зупиняється.
+        03:01 + 55 секунд = 03:56
     */
 
     setTimeout(() => {
@@ -498,7 +496,6 @@ musicButton.addEventListener("click", () => {
 /* Плаваючі сердечка */
 
 setInterval(() => {
-
 
     const heart = document.createElement("div");
 
