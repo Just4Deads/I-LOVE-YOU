@@ -1,0 +1,335 @@
+```html
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Для тебе ❤️</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Arial, sans-serif;
+
+    background:
+        radial-gradient(circle at top, #ffb6c9, transparent 45%),
+        linear-gradient(135deg, #ff6f91, #ff9eb5, #ff527c);
+
+    color: white;
+}
+
+.page {
+    width: 90%;
+    max-width: 500px;
+
+    padding: 35px 25px;
+
+    text-align: center;
+
+    background: rgba(255,255,255,0.18);
+
+    border: 1px solid rgba(255,255,255,0.35);
+
+    border-radius: 30px;
+
+    backdrop-filter: blur(15px);
+
+    box-shadow:
+        0 20px 60px rgba(120,0,40,0.3);
+
+    z-index: 10;
+
+    animation: appear 1s ease;
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 20px;
+    line-height: 1.6;
+}
+
+.heart {
+    font-size: 75px;
+
+    animation: heartbeat 1.3s infinite;
+}
+
+button {
+    margin-top: 20px;
+
+    padding: 15px 30px;
+
+    border: none;
+    border-radius: 40px;
+
+    background: white;
+
+    color: #ff4f7b;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,0.15);
+
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.08);
+}
+
+.hidden {
+    display: none;
+}
+
+.final {
+    animation: finalAppear 1.5s ease;
+}
+
+.final h1 {
+    font-size: 42px;
+}
+
+.small {
+    font-size: 17px;
+}
+
+.floating-heart {
+    position: absolute;
+
+    bottom: -60px;
+
+    font-size: 25px;
+
+    opacity: 0.7;
+
+    animation: floatUp linear infinite;
+}
+
+@keyframes heartbeat {
+
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.18);
+    }
+}
+
+@keyframes floatUp {
+
+    from {
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.8;
+    }
+
+    to {
+        transform:
+            translateY(-110vh)
+            rotate(360deg);
+
+        opacity: 0;
+    }
+}
+
+@keyframes appear {
+
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes finalAppear {
+
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- ПЕРША СТОРІНКА -->
+
+<div class="page" id="page1">
+
+    <div class="heart">❤️</div>
+
+    <h1>
+        У мене для тебе дещо є...
+    </h1>
+
+    <p>
+        Просто натисни на кнопку нижче.
+    </p>
+
+    <button onclick="nextPage(1)">
+        Відкрити ❤️
+    </button>
+
+</div>
+
+
+
+<!-- ДРУГА СТОРІНКА -->
+
+<div class="page hidden" id="page2">
+
+    <div class="heart">💗</div>
+
+    <h1>
+        Моя кохана
+    </h1>
+
+    <p>
+        Я хочу, щоб ти завжди пам'ятала,
+        наскільки сильно ти мені дорога.
+    </p>
+
+    <p>
+        Навіть коли між нами відстань,
+        ти все одно залишаєшся
+        найближчою людиною для мене.
+    </p>
+
+    <button onclick="nextPage(2)">
+        А тепер сюди 💕
+    </button>
+
+</div>
+
+
+
+<!-- ТРЕТЯ СТОРІНКА -->
+
+<div class="page hidden final" id="page3">
+
+    <div class="heart">💖</div>
+
+    <h1>
+        Я ТЕБЕ КОХАЮ
+    </h1>
+
+    <p>
+        МОЯ ДРУЖИНО ❤️
+    </p>
+
+    <p class="small">
+        І неважливо, скільки між нами кілометрів.
+        Моє серце завжди з тобою.
+    </p>
+
+    <p>
+        ❤️ 💕 💗 💖 💓
+    </p>
+
+</div>
+
+
+
+<script>
+
+function nextPage(page) {
+
+    document
+        .getElementById("page" + page)
+        .classList.add("hidden");
+
+    document
+        .getElementById("page" + (page + 1))
+        .classList.remove("hidden");
+
+}
+
+
+
+const hearts = [
+    "❤️",
+    "💕",
+    "💗",
+    "💖",
+    "💓",
+    "💞"
+];
+
+
+for (let i = 0; i < 30; i++) {
+
+    const heart =
+        document.createElement("div");
+
+    heart.className =
+        "floating-heart";
+
+    heart.innerHTML =
+        hearts[
+            Math.floor(
+                Math.random() * hearts.length
+            )
+        ];
+
+    heart.style.left =
+        Math.random() * 100 + "vw";
+
+    heart.style.animationDuration =
+        (5 + Math.random() * 8) + "s";
+
+    heart.style.animationDelay =
+        Math.random() * 8 + "s";
+
+    heart.style.fontSize =
+        (18 + Math.random() * 25) + "px";
+
+    document.body.appendChild(heart);
+
+}
+
+</script>
+
+</body>
+</html>
+```
